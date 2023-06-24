@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:riverpod_rest_api_call/logger/riverpod%20logger.dart';
 import 'package:riverpod_rest_api_call/model/user_repo.dart';
 
+import 'model/User.dart';
 import 'pages/home.dart';
 
-final fetchUserProvider = FutureProvider.autoDispose((ref) async {
-  final userRepository = ref.watch(userRepositoryProvider);
-  return userRepository.fetchUserData();
+final fetchUserProvider = FutureProvider<List<User>>((ref) async {
+ final users = ref.watch(userRepositoryProvider).fetchUserData();
+ return users;
 });
 
 void main() {

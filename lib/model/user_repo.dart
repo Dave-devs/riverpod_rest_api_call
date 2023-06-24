@@ -2,11 +2,8 @@ import 'dart:convert';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart';
 import 'User.dart';
-
+//https://random-data-api.com/api/v2/users
 class UserRepository {
-  final Ref ref;
-  UserRepository(this.ref);
-  
   String endpoint = 'https://random-data-api.com/api/v2/users';
   
   Future<List<User>> fetchUserData() async {
@@ -20,6 +17,4 @@ class UserRepository {
   }
 }
 
-final userRepositoryProvider = Provider<UserRepository>((ref) {
-  return UserRepository(ref);
-});
+final userRepositoryProvider = Provider<UserRepository>((ref) => UserRepository());

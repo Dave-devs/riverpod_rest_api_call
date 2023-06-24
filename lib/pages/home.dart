@@ -1,9 +1,6 @@
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../main.dart';
 import '../model/User.dart';
 import 'detail.dart';
@@ -13,14 +10,14 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(fetchUserProvider);
+    final userData = ref.watch(fetchUserProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Rest Api With Riverpod'),
         centerTitle: true,
       ),
       backgroundColor: Colors.white,
-      body: data.when(
+      body: userData.when(
           data: (data) {
             List<User> userList = data.map((e) => e).toList();
             return Column(
@@ -37,12 +34,22 @@ class HomePage extends ConsumerWidget {
                           );
                         },
                         child: Card(
+                          color: Colors.blueAccent,
                           elevation: 4,
-                          margin: const EdgeInsets.symmetric(vertical: 10),
+                          margin: const EdgeInsets.symmetric(vertical: 8),
                           child: ListTile(
-                            leading: Text(userList[index].id),
-                            title: Text(userList[index].firstName),
-                            subtitle: Text(userList[index].lastName),
+                            leading: Text(
+                                userList[index].id,
+                                style: const TextStyle(color: Colors.white),
+                            ),
+                            title: Text(
+                                userList[index].firstName,
+                                style: const TextStyle(color: Colors.white),
+                            ),
+                            subtitle: Text(
+                                userList[index].lastName,
+                                style: const TextStyle(color: Colors.white),
+                            ),
                             trailing: CircleAvatar(
                               backgroundImage: NetworkImage(userList[index].avatar),
                             ),
